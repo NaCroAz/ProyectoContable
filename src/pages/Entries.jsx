@@ -1,11 +1,17 @@
 import React from 'react'
-import { Routes } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Entries = () => {
+    const navigate = useNavigate();
+
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
+
     return (
         <>
             <div>
-                <button><Routes to="/"></Routes>Volver a Pagina Principal</button>
+                <button onClick={() => handleNavigate('/')}>Volver a Pagina Principal</button>
             </div>
             <div style={{ display: 'flex' }}>
                 <div style={{ flex: 1 }}>
