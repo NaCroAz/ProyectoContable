@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../styles/Entries.css'
+import '../styles/fontStyle.css'
 
 const Entries = () => {
     const navigate = useNavigate();
