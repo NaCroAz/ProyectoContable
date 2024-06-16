@@ -1,14 +1,12 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Stock.css';
+import '../styles/fontStyle.css';
 
-//* Estilos
-import '../styles/Stock.css'
-import '../styles/fontStyle.css'
+const Stock = ({ addAsiento, productos, setProductos }) => {
+    const navigate = useNavigate();
 
-const Stock = ({ addAsiento, productos, setProductos}) => {
-    const navigate = useNavigate()
-    
     const restarProducto = (productId) => {
         setProductos(prevProducts => {
             return prevProducts.map(product => {
@@ -24,6 +22,7 @@ const Stock = ({ addAsiento, productos, setProductos}) => {
             });
         });
     };
+
     const incrementarProducto = (productId) => {
         setProductos(prevProducts => {
             return prevProducts.map(product => {
@@ -44,21 +43,23 @@ const Stock = ({ addAsiento, productos, setProductos}) => {
         console.log('Productos actualizados:', productos);
     }, [productos]);
 
-    // Navegador de direcciones
     const handleNavigate = (path) => {
         navigate(path);
     };
 
-
     const ProductItem = ({ producto, incrementarProducto, restarProducto }) => {
         return (
-            <>
-                <li>
-                    Nombre: {producto.nombre}, Precio: ${producto.precio.toFixed(2)}, Cantidad: {producto.cantidad}
-                    <button onClick={() => incrementarProducto(producto.id)}>Vender</button>
-                    <button onClick={() => restarProducto(producto.id)} hidden={producto.cantidad === 0}>Comprar</button>
-                </li>
-            </>
+            <li className="producto-item">
+                <p>Nombre: {producto.nombre}</p>
+                <p>Precio: ${producto.precio.toFixed(2)}</p>
+                <p>Cantidad: {producto.cantidad}</p>
+                <button onClick={() => incrementarProducto(producto.id)}>
+                    <i className="fas fa-plus"></i> Vender
+                </button>
+                <button onClick={() => restarProducto(producto.id)} hidden={producto.cantidad === 0}>
+                    <i className="fas fa-minus"></i> Comprar
+                </button>
+            </li>
         );
     };
 
@@ -79,9 +80,11 @@ const Stock = ({ addAsiento, productos, setProductos}) => {
 
     return (
         <div>
-            <button onClick={() => handleNavigate('/')}>Volver a Pagina Principal</button>
+            <button id="volver-button" onClick={() => handleNavigate('/')}>
+                <i className="fas fa-arrow-left"></i> Volver a Página Principal
+            </button>
             <h1>Stock de Productos</h1>
-            <p>#Contenido a agregarr#</p>
+            <p id="productos-header">Control de productos</p>
             <ul>
                 <ProductList
                     productos={productos}
@@ -90,7 +93,7 @@ const Stock = ({ addAsiento, productos, setProductos}) => {
                 />
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export default Stock
+export default Stock;
