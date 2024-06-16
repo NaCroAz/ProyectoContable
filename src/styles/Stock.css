@@ -1,0 +1,103 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: inherit;
+    font-size: 1em;
+}
+
+header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#volver-button {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#volver-button i {
+    margin-right: 10px;
+}
+
+#volver-button:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+}
+
+#productos-header {
+    text-align: center;
+    font-size: 1.5em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.producto-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    list-style: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.producto-item p {
+    margin: 5px 0;
+}
+
+.producto-item button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 45%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.producto-item button:first-of-type {
+    background-color: #dc3545;
+}
+
+.producto-item button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.producto-item button:first-of-type:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.producto-item button i {
+    margin-right: 5px;
+}
