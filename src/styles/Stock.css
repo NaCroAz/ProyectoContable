@@ -45,13 +45,6 @@ h1 {
     color: #333;
 }
 
-#productos-header {
-    text-align: center;
-    font-size: 1.5em;
-    color: #666;
-    margin-bottom: 20px;
-}
-
 .producto-item {
     background-color: white;
     border: 1px solid #ddd;
@@ -74,9 +67,10 @@ h1 {
 
 .producto-item button {
     margin-top: 10px;
+    margin-left: 10px;
     padding: 10px;
-    width: 45%;
-    background-color: #28a745;
+    width: calc(50% - 20px);
+    background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 5px;
@@ -85,16 +79,16 @@ h1 {
 }
 
 .producto-item button:first-of-type {
-    background-color: #dc3545;
+    background-color: #28a745;
 }
 
 .producto-item button:hover {
-    background-color: #218838;
+    background-color: #c82333;
     transform: scale(1.05);
 }
 
 .producto-item button:first-of-type:hover {
-    background-color: #c82333;
+    background-color: #218838;
     transform: scale(1.05);
 }
 

@@ -12,7 +12,9 @@ const Invoices = () => {
 
     return (
         <div>
-            <button onClick={() => handleNavigate('/')}>Volver a Pagina Principal</button>
+            <button id="volver-button" onClick={() => handleNavigate('/')}>
+                <i className="fas fa-arrow-left"></i> Volver a Página Principal
+            </button>
             <h1>Creacion de Facturas</h1>
             <p>#Contenido a agregar#</p>
         </div>

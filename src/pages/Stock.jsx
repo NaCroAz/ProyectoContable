@@ -54,10 +54,10 @@ const Stock = ({ addAsiento, productos, setProductos }) => {
                 <p>Precio: ${producto.precio.toFixed(2)}</p>
                 <p>Cantidad: {producto.cantidad}</p>
                 <button onClick={() => incrementarProducto(producto.id)}>
-                    <i className="fas fa-plus"></i> Vender
+                    <i className="fas fa-plus"></i> Agregar
                 </button>
                 <button onClick={() => restarProducto(producto.id)} hidden={producto.cantidad === 0}>
-                    <i className="fas fa-minus"></i> Comprar
+                    <i className="fas fa-minus"></i> Quitar
                 </button>
             </li>
         );
@@ -84,7 +84,6 @@ const Stock = ({ addAsiento, productos, setProductos }) => {
                 <i className="fas fa-arrow-left"></i> Volver a Página Principal
             </button>
             <h1>Stock de Productos</h1>
-            <p id="productos-header">Control de productos</p>
             <ul>
                 <ProductList
                     productos={productos}
