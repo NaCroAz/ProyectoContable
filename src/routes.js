@@ -36,7 +36,6 @@ const Rutas = () => {
                 <Route path="/entries" element={<Entries asientos={asientos} productos={productos} setDinero={setDinero} dinero={dinero}/>} />
                 <Route path="/invoices" element={<Invoices />} />
                 <Route path="/stock" element={<Stock addAsiento={addAsiento} productos={productos} setProductos={setProductos}/>}/>
-
             </Routes>
         </Router>
     )

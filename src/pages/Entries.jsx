@@ -40,13 +40,16 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
         const asiento = {
             tipo,
             producto: producto.nombre,
-            cantidad: producto.cantidad,
-            precio: producto.precio,
+            cantidad: 1,
+            precio: producto.precio.toFixed(2),
             fecha: new Date().toLocaleString()
         };
         
-        setProductos(updatedProductos);
+        console.log(asiento)
+        console.log(asientos)
+        
         addAsiento(asiento);
+        setProductos(updatedProductos);
     };
 
     const AsientosList = ({ productos }) => {
@@ -63,6 +66,18 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
         );
     };
 
+    const AsientosCreados = ({ asientos }) => {
+        return (
+            <ul>
+                {asientos.map((asiento, index) => (
+                    <li key={index}>
+                        {asiento.fecha} - {asiento.tipo}: {asiento.producto}, Cantidad: 1, Precio: ${asiento.precio}
+                    </li>
+                ))}
+            </ul>
+        );
+    };
+
     return (
         <div>
             <button id="volver-button" onClick={() => handleNavigate('/')}>
@@ -76,11 +91,7 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
             <h2>Lista de Asientos Generados:</h2>
             <h1>$ {dinero.toFixed(2)}</h1>
             <ul>
-                {asientos.map((asiento, index) => (
-                    <li key={index}>
-                        {asiento.fecha} - {asiento.tipo}: {asiento.producto}, Cantidad: 1 ({asiento.cantidad}), Precio: ${asiento.precio.toFixed(2)}
-                    </li>
-                ))}
+                <AsientosCreados asientos={asientos} />
             </ul>
         </div>
     );
