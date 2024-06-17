@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Invoices.css';
 import '../styles/fontStyle.css';
+import '../styles/Entries.css'
 
-const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
+const Entries = ({ productos: initialProductos, dinero, setDinero }) => {
     const navigate = useNavigate();
     const [asientos, setAsientos] = useState([]);
     const [productos, setProductos] = useState(initialProductos);
@@ -44,10 +45,10 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
             precio: producto.precio.toFixed(2),
             fecha: new Date().toLocaleString()
         };
-        
+
         console.log(asiento)
         console.log(asientos)
-        
+
         addAsiento(asiento);
         setProductos(updatedProductos);
     };
@@ -57,9 +58,14 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
             <>
                 {productos.map(producto => (
                     <li key={producto.id}>
-                        {producto.nombre} - ${producto.precio.toFixed(2)} - Cantidad: {producto.cantidad}
-                        <button onClick={() => generarAsiento('Debe', producto.id)}>Agregar Debe</button>
-                        <button onClick={() => generarAsiento('Haber', producto.id)}>Agregar Haber</button>
+                        <div className='producto'>
+                            {producto.nombre} - ${producto.precio.toFixed(2)} - Cantidad: {producto.cantidad}
+                        </div>
+                        <div className='votones'>
+                            <button onClick={() => generarAsiento('Debe', producto.id)}>Agregar Debe</button>
+                            <button onClick={() => generarAsiento('Haber', producto.id)}>Agregar Haber</button>
+                        </div>
+
                     </li>
                 ))}
             </>
@@ -68,7 +74,7 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
 
     const AsientosCreados = ({ asientos }) => {
         return (
-            <ul>
+            <ul className='ulSele'>
                 {asientos.map((asiento, index) => (
                     <li key={index}>
                         {asiento.fecha} - {asiento.tipo}: {asiento.producto}, Cantidad: 1, Precio: ${asiento.precio}
@@ -85,14 +91,12 @@ const Entries = ({ productos: initialProductos , dinero, setDinero}) => {
             </button>
             <h1>Asiendas - Moldes</h1>
             <h2>Asientos:</h2>
-            <ul>
+            <ul className='ulSele'>
                 <AsientosList productos={productos} addAsiento={addAsiento} />
             </ul>
             <h2>Lista de Asientos Generados:</h2>
             <h1>$ {dinero.toFixed(2)}</h1>
-            <ul>
-                <AsientosCreados asientos={asientos} />
-            </ul>
+            <AsientosCreados asientos={asientos} />
         </div>
     );
 };
