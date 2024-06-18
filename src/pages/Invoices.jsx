@@ -70,7 +70,7 @@ const Invoices = ({ dinero, setDinero, control, setControl }) => {
     };
 
     return (
-        <div>
+        <div className='nose'>
             <button id="volver-button" onClick={() => handleNavigate('/')}>
                 <i className="fas fa-arrow-left"></i> Volver a Página Principal
             </button>
