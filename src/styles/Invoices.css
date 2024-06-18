@@ -19,3 +19,19 @@
 #volver-button:hover {
     background-color: #0056b3;
 }
+.operaciones-list{
+    width: 60%;
+    height: 30px;
+}
+.operacion-item{
+    width: 100%;
+    background-color: #0056b3;
+}
+
+.product-form{
+    width: 60%;
+}
+#tipoTransaccion{
+    padding: 1.1em;
+    font-size: 1.1em;
+}

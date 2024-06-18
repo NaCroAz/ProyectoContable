@@ -24,30 +24,35 @@ const Entries = ({ productos: initialProductos, dinero, setDinero }) => {
         const updatedProductos = [...productos];
         const producto = updatedProductos[productoIndex];
 
-        if (tipo === 'Debe' && producto.cantidad > 0 && dinero > producto.precio) {
-            producto.cantidad -= 1;
-            setDinero(dinero - producto.precio);
-        } else if (tipo === 'Haber' && producto.cantidad >= 0) {
+        producto.cantidad = parseInt(producto.cantidad)
+        producto.precio = parseInt(producto.precio)
+
+        if (tipo === 'Debe' && producto.cantidad >= 0 && dinero > producto.precio) {
             producto.cantidad += 1;
+            setDinero(dinero - producto.precio);
+        } else if (tipo === 'Haber' && producto.cantidad > 0) {
+            producto.cantidad -= 1;
             setDinero(dinero + producto.precio);
-        } else if (tipo === 'Debe' && producto.cantidad === 0) {
-            alert('No hay Stock')
-            return;
+        } else if (tipo === 'Haber' && producto.cantidad == 0) {
+                alert('No hay Stock');
+                return;
         } else if (dinero < producto.precio) {
-            alert('No hay Dinero')
+            alert('No hay Dinero');
             return;
         }
 
         const asiento = {
             tipo,
             producto: producto.nombre,
-            cantidad: 1,
-            precio: producto.precio.toFixed(2),
-            fecha: new Date().toLocaleString()
+            cantidad: producto.cantidad,
+            precio: producto.precio,
+            fecha: new Date().toLocaleDateString()
         };
 
+        //! Solo aparecen por consola de Browser
         console.log(asiento)
         console.log(asientos)
+        //! Solo aparecen por consola de Browser
 
         addAsiento(asiento);
         setProductos(updatedProductos);
@@ -59,11 +64,11 @@ const Entries = ({ productos: initialProductos, dinero, setDinero }) => {
                 {productos.map(producto => (
                     <li key={producto.id}>
                         <div className='producto'>
-                            {producto.nombre} - ${producto.precio.toFixed(2)} - Cantidad: {producto.cantidad}
+                            {producto.nombre}   Precio:${producto.precio}   Cantidad: {parseInt(producto.cantidad)}
                         </div>
                         <div className='votones'>
-                            <button onClick={() => generarAsiento('Debe', producto.id)}>Agregar Debe</button>
-                            <button onClick={() => generarAsiento('Haber', producto.id)}>Agregar Haber</button>
+                            <button onClick={() => generarAsiento('Debe', producto.id)}>Compras</button>
+                            <button onClick={() => generarAsiento('Haber', producto.id)}>Ventas</button>
                         </div>
 
                     </li>
@@ -74,10 +79,10 @@ const Entries = ({ productos: initialProductos, dinero, setDinero }) => {
 
     const AsientosCreados = ({ asientos }) => {
         return (
-            <ul className='ulSele'>
+            <ul className='ulSele' id='asientosCreados'>
                 {asientos.map((asiento, index) => (
                     <li key={index}>
-                        {asiento.fecha} - {asiento.tipo}: {asiento.producto}, Cantidad: 1, Precio: ${asiento.precio}
+                        {asiento.fecha} - {asiento.producto}, Cantidad: 1, Precio: ${asiento.precio}
                     </li>
                 ))}
             </ul>
@@ -89,14 +94,20 @@ const Entries = ({ productos: initialProductos, dinero, setDinero }) => {
             <button id="volver-button" onClick={() => handleNavigate('/')}>
                 <i className="fas fa-arrow-left"></i> Volver a Página Principal
             </button>
-            <h1>Asiendas - Moldes</h1>
-            <h2>Asientos:</h2>
-            <ul className='ulSele'>
-                <AsientosList productos={productos} addAsiento={addAsiento} />
-            </ul>
-            <h2>Lista de Asientos Generados:</h2>
-            <h1>$ {dinero.toFixed(2)}</h1>
-            <AsientosCreados asientos={asientos} />
+            <h1>Dinero actual de la empresa : $ {dinero}</h1>
+            <h1>Inventario</h1>
+            <div style={{ display: 'flex', width: '100%' }}>
+                <div style={{ flex: 1 }}>
+                    <h2 className='detalles'>Listado de Productos</h2>
+                    <ul className='ulSele'>
+                        <AsientosList productos={productos} addAsiento={addAsiento} />
+                    </ul>
+                </div>
+                <div style={{ flex: 1, overflow: 'auto' }}>
+                    <h2 className='detalles'>Asientos Creados</h2>
+                    <AsientosCreados asientos={asientos} />
+                </div>
+            </div>
         </div>
     );
 };

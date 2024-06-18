@@ -1,11 +1,12 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Stock.css';
 import '../styles/fontStyle.css';
 
 const Stock = ({ addAsiento, productos, setProductos }) => {
     const navigate = useNavigate();
+    const [newProduct, setNewProduct] = useState({ nombre: '', precio: '', cantidad: parseInt('') });
 
     const restarProducto = (productId) => {
         setProductos(prevProducts => {
@@ -32,10 +33,31 @@ const Stock = ({ addAsiento, productos, setProductos }) => {
                         precio: product.precio,
                         tipo: 'Venta' // transaccion
                     });
-                    return { ...product, cantidad: product.cantidad + 1 };
+                    return { ...product, cantidad : parseInt(product.cantidad) + 1 };
                 }
                 return product;
             });
+        });
+    };
+
+
+    const handleCambioInput = (e) => {
+        const { name, value } = e.target;
+        setNewProduct(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        agregarProducto(newProduct);
+        setNewProduct({ nombre: '', precio: '', cantidad: parseInt('') }); // Reset form
+    };
+
+    const agregarProducto = (nuevoProducto) => {
+        setProductos(prevProducts => {
+            return [...prevProducts, { ...nuevoProducto, id: prevProducts.length + 1 }];
         });
     };
 
@@ -51,19 +73,19 @@ const Stock = ({ addAsiento, productos, setProductos }) => {
         return (
             <li className="producto-item">
                 <p>Nombre: {producto.nombre}</p>
-                <p>Precio: ${producto.precio.toFixed(2)}</p>
+                <p>Precio: ${producto.precio}</p>
                 <p>Cantidad: {producto.cantidad}</p>
                 <button onClick={() => incrementarProducto(producto.id)}>
                     <i className="fas fa-plus"></i> Agregar
                 </button>
-                <button onClick={() => restarProducto(producto.id)} hidden={producto.cantidad === 0}>
+                <button onClick={() => restarProducto(producto.id)} hidden={parseInt(producto.cantidad) === 0}>
                     <i className="fas fa-minus"></i> Quitar
                 </button>
             </li>
         );
     };
 
-    const ProductList = ({ productos, incrementarProducto, restarProducto }) => {
+    const ProductList = ({ productos, incrementarProducto, restarProducto, agregarProducto }) => {
         return (
             <>
                 {productos.map(producto => (
@@ -72,6 +94,7 @@ const Stock = ({ addAsiento, productos, setProductos }) => {
                         producto={producto}
                         incrementarProducto={incrementarProducto}
                         restarProducto={restarProducto}
+                        agregarProducto={agregarProducto}
                     />
                 ))}
             </>
@@ -84,11 +107,21 @@ const Stock = ({ addAsiento, productos, setProductos }) => {
                 <i className="fas fa-arrow-left"></i> Volver a Página Principal
             </button>
             <h1>Stock de Productos</h1>
-            <ul>
+            <details className='product-formContainer'>
+                <summary>Agregar Producto</summary>
+                <form onSubmit={handleSubmit} className="product-form">
+                    <input type='text' name='nombre' value={newProduct.nombre} onChange={handleCambioInput} placeholder='Nombre' />
+                    <input type='number' name='precio' value={parseInt(newProduct.precio)} onChange={handleCambioInput} placeholder='Precio' />
+                    <input type='number' name='cantidad' value={parseInt(newProduct.cantidad)} onChange={handleCambioInput} placeholder='Cantidad' />
+                    <button type='submit' className="product-button">Agregar Producto</button>
+                </form>
+            </details>
+            <ul className="lista-productos">
                 <ProductList
                     productos={productos}
                     incrementarProducto={incrementarProducto}
                     restarProducto={restarProducto}
+                    agregarProducto={agregarProducto}
                 />
             </ul>
         </div>

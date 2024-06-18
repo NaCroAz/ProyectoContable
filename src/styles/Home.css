@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.boton-contenedor{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 37%;
+    left: 7%;
+    margin: 30px;
+    width: 80%;
+}
+
+
+.botones{
+    height: 100px;
+    width: 350px;
+    font-size: 30px;
+    border: solid 5px;
+    border-radius: 4px;
+}
+
+.botones b{
+    margin: auto
+}
+
+.botones:hover{
+    background-color: rgb(173, 173, 173);
+    cursor: pointer;
+}
