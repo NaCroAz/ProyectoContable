@@ -21,7 +21,16 @@ body {
     border: solid 5px;
     border-radius: 4px;
 }
-
+img{
+    width: 100%;
+}
+.wi{
+    display: flex;
+    justify-content: center;
+    color: rgb(13, 33, 49);
+    font-size: 4em;
+    margin: 120px auto;
+}
 .botones b{
     margin: auto
 }

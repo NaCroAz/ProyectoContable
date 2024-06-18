@@ -15,7 +15,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Pagina Principal</h1>
+            <h1 className='wi'>Pagina Principal</h1>
             <div className="boton-contenedor">
                 <button className='ingreso botones' onClick={() => handleNavigate('/invoices')}>
                     <img src={img1} />
